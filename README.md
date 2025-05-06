@@ -1,27 +1,47 @@
-# MercuryAR
+# AR-Mercury
 
-![alt text](image.png)
+# AR Object Recognition and Rendering (Unity + YOLOv8)
 
-一个基于Unity开发的，可识别特定物体并渲染模型的AR程序。可打包并导出到安卓设备中使用。
+An AR application built with Unity that detects specific objects using YOLOv8 and renders corresponding 3D models. The project can be packaged and deployed to Android devices.
 
+## 📦 Project Overview
 
-各程序版本如下：
+This project integrates Unity's rendering engine with YOLO-based object detection. It supports:
 
-YOLO版本：YOLOv8  https://github.com/ultralytics/ultralytics
+- Real-time object recognition
+- ONNX model inference via Unity Barracuda
+- Android deployment with camera input and automatic rotation compensation
 
-模型版本：ONNX 10
+## 🔧 Versions
 
-Unity版本：2022.3.23f1
+| Component       | Version                                                                 |
+|----------------|-------------------------------------------------------------------------|
+| YOLO           | YOLOv8 ([GitHub](https://github.com/ultralytics/ultralytics))           |
+| Model Format   | ONNX 10                                                                 |
+| Unity          | 2022.3.23f1                                                             |
+| Barracuda      | 3.0.1 ([Docs](https://docs.unity3d.com/Packages/com.unity.barracuda@3.0/manual/index.html)) |
 
-barracuda版本：3.0.1  https://docs.unity3d.com/Packages/com.unity.barracuda@3.0/manual/index.html
+## 📁 Folder Structure
 
+- `YOLO/`  
+  Contains training, inference, and export scripts. See [Ultralytics Documentation](https://docs.ultralytics.com/zh) for setup and dependencies.
 
-备注：
+- Other folders  
+  Unity project files. Import these into Unity to get started.  
+  The core logic resides in `ObjectDetection.cs`, with detailed comments for guidance.
 
-1.YOLO文件夹中，存放着所有训练、预测、导出代码，相关依赖可见官方文档：https://docs.ultralytics.com/zh
+## ⚠️ Notes
 
-2.除YOLO外，其它文件夹为Unity项目文件夹，可导入Unity中使用。其中，ObjectDetection.cs为项目代码，具体逻辑见注释。
+1. When importing a custom ONNX model, use **version 9 or 10**. Other versions may cause errors with Barracuda.
+2. On Android, the camera feed is rotated 90° by default. This has been corrected in the code.  
+   For **PC use**, remove or adjust the rotation-related code accordingly.
 
-3.若导入自用ONNX模型，可选择版本9或10，其它版本barracuda可能会报错
+## 🚀 Deployment Instructions
 
-4.由于安卓设备会自动将摄像头画面旋转90度，此处在代码上已经做了抵消处理。如果需要在PC端使用，需要修改代码，去除其中与旋转有关的指令即可。
+1. Open the Unity project with Unity version `2022.3.23f1`.
+2. Ensure Barracuda package version `3.0.1` is installed via Unity Package Manager.
+3. Place your ONNX model in the appropriate folder.
+4. Build and deploy the project to an Android device.
+
+---
+
